@@ -2,6 +2,10 @@
 $:.push './'
 require 'professor.rb'
 require 'aluno.rb'
+require 'coordenator.rb'
+require 'curso.rb'
+require 'matricula.rb'
+require 'turma.rb'
 
 # Método 2
 est = Professor.new ({:nome => "Lucca Pietro Benício Fogaça", :email => "luccapietrobeniciofogaca@policiacivil.sp.gov.br", :salario => "1921.45"})
