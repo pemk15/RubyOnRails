@@ -45,3 +45,13 @@ end
 
 ActiveRecord::Base.connection.add_foreign_key :matriculas, :turmas, column: :turmas_id, on_delete: :cascade
 ActiveRecord::Base.connection.add_foreign_key :matriculas, :alunos, column: :alunos_id, on_delete: :cascade
+
+#Coordenadores de cursos
+ActiveRecord::Base.connection.create_table :coordenators do |t|
+  t.column :professors_id,  :integer
+  t.column :cursos_id,      :integer
+  t.column :data_eleicao, :date
+end
+
+ActiveRecord::Base.connection.add_foreign_key :coordenators, :professors, column: :professors_id, on_delete: :cascade
+ActiveRecord::Base.connection.add_foreign_key :coordenators, :cursos,     column: :cursos_id,     on_delete: :cascade

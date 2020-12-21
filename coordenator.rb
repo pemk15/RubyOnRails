@@ -4,9 +4,7 @@ require 'active_record'
 ActiveRecord::Base.establish_connection :adapter => "sqlite3",
                                         :database => "Trab.sqlite3" 
                                         
-class Professor < ActiveRecord::Base
-  has_many :turmas
+class Coordenator < ActiveRecord::Base
+  belongs_to :professors
   belongs_to :cursos
-  has_one :cursos, through: :coordenator
 end
-
