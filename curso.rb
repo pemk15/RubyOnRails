@@ -7,5 +7,5 @@ ActiveRecord::Base.establish_connection :adapter => "sqlite3",
 class Curso < ActiveRecord::Base
   has_many :turmas
   has_many :professors, through: :turmas
-  has_onte :professor, through: :coordenators
+  has_one :professor, through: :coordenators
 end
