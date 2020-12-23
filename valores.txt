@@ -1,0 +1,1 @@
+inserir, professors, Nome Bruno Muller, email bmuller@inf.ufpr.br, salario 15000
