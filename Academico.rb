@@ -7,6 +7,32 @@ require 'curso.rb'
 require 'matricula.rb'
 require 'turma.rb'
 
+count = 0
+stop_condition = "\n"
+until stop_condition == line = gets
+  words = line.split
+  if words[0].start_with?("ins") then
+    puts("Insert")
+  elsif words[0].start_with?("rem") then
+    puts("remove")
+  elsif words[0].start_with?("atu") then
+    puts("Atualiza")
+  else
+    STDERR.puts "#{words[0]} Não é uma operação válida"
+  end
+  puts("Antes: #{words}")
+  words.delete(words[0])
+  puts("Depois: #{words}")
+
+
+  words.each do |word|
+    count += 1
+  end
+end
+
+puts(count)
+
+=begin
 inp = gets
 novo = ''
 
@@ -19,8 +45,10 @@ inp.each_char do |n|
   end
 end
 puts str
+=end
 
-if startsWith (inser, remov, atualiz) then
+=begin
+if startsWith (ins, rem, atu) then
   opperation = findOperation;
   removeOperacao; #Encontra a primeira ',' e remove tudo até ela
   if startsWith(videTableName) then
@@ -40,12 +68,15 @@ if startsWith (inser, remov, atualiz) then
 else
   raise errorNotAValidOperation;
 end
-
-
+=end
 
 
 
 =begin
+findOperation() {
+  
+}
+
 # Método 2
 est = Professor.new ({:nome => "Lucca Pietro Benício Fogaça", :email => "luccapietrobeniciofogaca@policiacivil.sp.gov.br", :salario => "1921.45"})
 est.save
