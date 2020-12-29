@@ -14,26 +14,44 @@ stop_condition = "\n"
 
 until stop_condition == line = gets
   words = line.split
-  #Valida entrada
+  #Valida operação
   case
-  when words[0].start_with?("ins")
-    puts("Insert")
-  when words[0].start_with?("rem")
-    puts("remove")
-  when words[0].start_with?("atu")
-    puts("Atualiza")
-  else
-    STDERR.puts "#{words[0]} Não é uma operação válida"
+    when words[0].downcase.start_with?("ins")
+      op = 0
+    when words[0].downcase.start_with?("rem")
+      op = 1
+    when words[0].downcase.start_with?("atu")
+      op = 2
+    else
+      STDERR.puts "#{words[0]} não é uma operação válida"
+      error = 1
+
   end
-  puts("Antes: #{words}")
   words.delete(words[0])
-  puts("Depois: #{words}")
 
-
-
-  words.each do |word|
-    count += 1
+  case
+    when words[0].downcase.start_with?("professor")
+      puts("professor")
+    when words[0].downcase.start_with?("aluno")
+      puts("aluno")
+    when words[0].downcase.start_with?("coordenator")
+      puts("coordenator")
+    when words[0].downcase.start_with?("curso")
+      puts("curso")
+    when words[0].downcase.start_with?("matricula")
+      puts("matricula")
+    when words[0].downcase.start_with?("turma")
+      puts("turma")
+    else
+      STDERR.puts "#{words[0]} não é uma tabela ou relação válida"
+      error = 1
   end
+  words.delete(words[0])
+
+
+  # words.each do |word|
+  #   count += 1
+  # end
 end
 
 puts(count)
