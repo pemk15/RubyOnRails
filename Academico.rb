@@ -16,31 +16,31 @@ until stop_condition == line = gets
   words = line.split
   #Valida operação
   case
-    when words[0].downcase.start_with?("ins")
+    when words[0] =~ /insert|inserir|insere/i
       op = 0
-    when words[0].downcase.start_with?("rem")
+    when words[0] =~ /remove|delete|remover/i
       op = 1
-    when words[0].downcase.start_with?("atu")
+    when words[0] =~ /update|atualizar/i
       op = 2
     else
       STDERR.puts "#{words[0]} não é uma operação válida"
       error = 1
 
   end
-  words.delete(words[0])
+  words.shift 
 
   case
-    when words[0].downcase.start_with?("professor")
+    when words[0] =~ /professor/i
       puts("professor")
-    when words[0].downcase.start_with?("aluno")
+    when words[0] =~ /aluno/i
       puts("aluno")
-    when words[0].downcase.start_with?("coordenator")
+    when words[0] =~ /coordenator/i
       puts("coordenator")
-    when words[0].downcase.start_with?("curso")
+    when words[0] =~ /curso/i
       puts("curso")
-    when words[0].downcase.start_with?("matricula")
+    when words[0] =~ /matricula/i
       puts("matricula")
-    when words[0].downcase.start_with?("turma")
+    when words[0] =~ /turma/i
       puts("turma")
     else
       STDERR.puts "#{words[0]} não é uma tabela ou relação válida"

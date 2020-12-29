@@ -18,7 +18,6 @@ end;
 
 #Tabela que armazena os alunos do curso
 ActiveRecord::Base.connection.create_table :alunos do |t|  
-  t.string :cpf,   limit: 11
   t.string :nome,  limit: 50
   t.string :email, limit: 50
   t.string :fone,  limit: 14
