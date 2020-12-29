@@ -9,13 +9,18 @@ require 'turma.rb'
 
 count = 0
 stop_condition = "\n"
+
+
+
 until stop_condition == line = gets
   words = line.split
-  if words[0].start_with?("ins") then
+  #Valida entrada
+  case
+  when words[0].start_with?("ins")
     puts("Insert")
-  elsif words[0].start_with?("rem") then
+  when words[0].start_with?("rem")
     puts("remove")
-  elsif words[0].start_with?("atu") then
+  when words[0].start_with?("atu")
     puts("Atualiza")
   else
     STDERR.puts "#{words[0]} Não é uma operação válida"
@@ -23,6 +28,7 @@ until stop_condition == line = gets
   puts("Antes: #{words}")
   words.delete(words[0])
   puts("Depois: #{words}")
+
 
 
   words.each do |word|
