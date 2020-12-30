@@ -32,10 +32,13 @@ until stop_condition == line = gets
       classe = Professor.new();
       words.shift;
       columns = words.select {|e| e =~ /nome|email|salario/i};
-      columns.each_slice(2) do |a, b|
-        puts("a: ",a, " b: ", b)
-        #fields = [{:"#{words[a]}"=>words[a+1..b]}];
-    end
+      if columns.size < 3 or columns.size > 3 then
+        STDERR.puts "Algo de errado não está certo"
+      end
+      fields = [{:"#{columns[0]}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
+        :"#{columns[1]}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
+        :"#{columns[2]}"=>words[(words.index(columns[2])+1)..-1].join(" ")}];
+        puts(fields);
     when words[0] =~ /aluno/i
       classe = Aluno.new()
     when words[0] =~ /coordenator/i
