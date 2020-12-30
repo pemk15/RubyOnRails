@@ -10,8 +10,6 @@ require 'turma.rb'
 count = 0
 stop_condition = "\n"
 
-
-
 until stop_condition == line = gets
   words = line.split
   #Valida operação
@@ -31,23 +29,28 @@ until stop_condition == line = gets
 
   case
     when words[0] =~ /professor/i
-      puts("professor")
+      classe = Professor.new();
+      words.shift;
+      columns = words.select {|e| e =~ /nome|email|salario/i};
+      columns.each_slice(2) do |a, b|
+        puts("a: ",a, " b: ", b)
+        #fields = [{:"#{words[a]}"=>words[a+1..b]}];
+    end
     when words[0] =~ /aluno/i
-      puts("aluno")
+      classe = Aluno.new()
     when words[0] =~ /coordenator/i
-      puts("coordenator")
+      classe = Coordenator.new()
     when words[0] =~ /curso/i
-      puts("curso")
+      classe = Curso.new()
     when words[0] =~ /matricula/i
-      puts("matricula")
+      classe = Matricula.new()
     when words[0] =~ /turma/i
-      puts("turma")
+      classe = Turma.new()
     else
       STDERR.puts "#{words[0]} não é uma tabela ou relação válida"
       error = 1
   end
-  words.delete(words[0])
-
+  words.shift 
 
   # words.each do |word|
   #   count += 1
