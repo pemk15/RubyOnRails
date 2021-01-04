@@ -73,7 +73,26 @@ until stop_condition == line = gets
         end
       end
     when words[0] =~ /coordenator/i
-      classe = Coordenator.new()
+      words.shift;
+      if op == 0 then
+        columns = words.select {|e| e =~  /professors_id|cursos_id|data_eleicao/i};
+        if columns.size < 2 or columns.size > 2 then
+          STDERR.puts "Devem ser informados os valores para as colunas: professors_id, cursos_id e data_eleicao"
+        end
+        fields = [{
+          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
+          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
+          :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..-1].join(" ")
+        }];
+
+        fields.each do |e|
+          coordenator = Coordenator.new()
+          coordenator.professors_id = e[:professors_id]
+          coordenator.cursos_id = e[:cursos_id]
+          coordenator.data_eleicao = e[:data_eleicao]
+          coordenator.save
+        end
+      end
     when words[0] =~ /curso/i
       words.shift;
       if op == 0 then
