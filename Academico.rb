@@ -40,7 +40,6 @@ until stop_condition == line = gets
           :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
           :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..-1].join(" ")
         }];
-        puts(fields);
 
         fields.each do |e|
           professor = Professor.new()
@@ -63,7 +62,6 @@ until stop_condition == line = gets
           :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" "),
           :"#{columns[3].downcase}"=>words[(words.index(columns[3])+1)..-1].join(" ")
         }];
-        puts(fields);
 
         fields.each do |e|
           aluno = Aluno.new()
@@ -77,7 +75,24 @@ until stop_condition == line = gets
     when words[0] =~ /coordenator/i
       classe = Coordenator.new()
     when words[0] =~ /curso/i
-      classe = Curso.new()
+      words.shift;
+      if op == 0 then
+        columns = words.select {|e| e =~ /nome|departamento/i};
+        if columns.size < 2 or columns.size > 2 then
+          STDERR.puts "Devem ser informados os valores para as colunas: nome e departamento"
+        end
+        fields = [{
+          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
+          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..-1].join(" ")
+        }];
+
+        fields.each do |e|
+          curso = Curso.new()
+          curso.nome = e[:nome].split.map(&:capitalize).join(' ')
+          curso.departamento = e[:departamento]
+          curso.save
+        end
+      end
     when words[0] =~ /matricula/i
       classe = Matricula.new()
     when words[0] =~ /turma/i
