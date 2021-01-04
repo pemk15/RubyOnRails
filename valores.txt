@@ -1,1 +1,3 @@
-inserir, professors, Nome Bruno Muller, email bmuller@inf.ufpr.br, salario 15000
+inserir professors Nome Bruno Muller email bmuller@inf.ufpr.br salario 15000
+inserir alunos nome patrick Eduardo Marchor Karvat email pemk15@inf.ufpr.br fone (41)6666-6666 data_nascimento 19960324
+
