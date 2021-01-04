@@ -29,16 +29,23 @@ until stop_condition == line = gets
 
   case
     when words[0] =~ /professor/i
-      classe = Professor.new();
       words.shift;
       columns = words.select {|e| e =~ /nome|email|salario/i};
       if columns.size < 3 or columns.size > 3 then
-        STDERR.puts "Algo de errado não está certo"
+        STDERR.puts "Devem ser informaods os valores para as colunas: nome, email, salario"
       end
       fields = [{:"#{columns[0]}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
         :"#{columns[1]}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
         :"#{columns[2]}"=>words[(words.index(columns[2])+1)..-1].join(" ")}];
         puts(fields);
+
+      fields.each do |e|
+        est = Professor.new()
+        est.nome = e[:nome]
+        est.email = e[:email]
+        est.salario = e[:salario]
+        est.save
+      end
     when words[0] =~ /aluno/i
       classe = Aluno.new()
     when words[0] =~ /coordenator/i
