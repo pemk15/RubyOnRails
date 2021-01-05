@@ -1,7 +1,9 @@
-inserir professors Nome Bruno Muller email bmuller@inf.ufpr.br salario 15000
-inserir alunos nome patrick Eduardo Marchor Karvat email pemk15@inf.ufpr.br fone (41)6666-6666 data_nascimento 19960324
-inserir cursos nome Ciencia da Computação departamento Informatica
+inserir professor Nome Bruno Muller email bmuller@inf.ufpr.br salario 15000
+inserir professor Nome Eduardo Almeida email eduardo@inf.ufpr.br salario 15000
+inserir aluno nome patrick Eduardo Marchor Karvat email pemk15@inf.ufpr.br fone (41)6666-6666 data_nascimento 19960324
+inserir curso nome Ciencia da Computação departamento Informatica
 inserir coordenator cursos_id 1 professors_id 1 data_eleicao 20210101
 inserir turma professors_id 1 cursos_id 1 data_inicio 20210101 carga_horaria 60
 inserir matricula turmas_id 1 alunos_id 1 data_matricula 20201201
+delete professor id 2
 
