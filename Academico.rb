@@ -32,12 +32,10 @@ until stop_condition == line = gets
       words.shift;
       if op == 0 then
         columns = words.select {|e| e =~ /nome|email|salario/i};
-        if columns.size < 3 or columns.size > 3 then
-          STDERR.puts "Devem ser informados os valores para as colunas: nome, email e salario"
-        end
-        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
-        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
-        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ");
+
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ") if (columns.length() > 0);
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ") if (columns.length() > 1);
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ") if (columns.length() > 3);
 
         professor = Professor.new()
         professor.nome = fields[:nome].split.map(&:capitalize).join(' ')
@@ -49,13 +47,10 @@ until stop_condition == line = gets
       words.shift;
       if op == 0 then
         columns = words.select {|e| e =~ /nome|email|fone|data_nascimento/i};
-        if columns.size < 4 or columns.size > 4 then
-          STDERR.puts "Devem ser informados os valores para as colunas: nome, email, fone e data_nascimento"
-        end
-        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
-        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
-        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" ");
-        fields[:"#{columns[3].downcase}"] = words[(words.index(columns[3])+1)..-1].join(" ");
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ") if (columns.length() > 0);
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ") if (columns.length() > 1);
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" ") if (columns.length() > 2);
+        fields[:"#{columns[3].downcase}"] = words[(words.index(columns[3])+1)..-1].join(" ") if (columns.length() > 3);
 
         aluno = Aluno.new()
         aluno.nome = fields[:nome].split.map(&:capitalize).join(' ')
@@ -68,12 +63,10 @@ until stop_condition == line = gets
       words.shift;
       if op == 0 then
         columns = words.select {|e| e =~  /professors_id|cursos_id|data_eleicao/i};
-        if columns.size < 3 or columns.size > 3 then
-          STDERR.puts "Devem ser informados os valores para as colunas: professors_id, cursos_id e data_eleicao"
-        end
-        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
-        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
-        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ");
+
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ") if (columns.length() > 0);
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ") if (columns.length() > 1);
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ") if (columns.length() > 2);
 
         coordenator = Coordenator.new()
         coordenator.professors_id = fields[:professors_id]
@@ -85,11 +78,9 @@ until stop_condition == line = gets
       words.shift;
       if op == 0 then
         columns = words.select {|e| e =~ /nome|departamento/i};
-        if columns.size < 2 or columns.size > 2 then
-          STDERR.puts "Devem ser informados os valores para as colunas: nome e departamento"
-        end
-        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
-        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..-1].join(" ");
+
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ") if (columns.length() > 0);
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..-1].join(" ") if (columns.length() > 1);
 
           curso = Curso.new();
           curso.nome = fields[:nome].split.map(&:capitalize).join(' ');
@@ -100,12 +91,10 @@ until stop_condition == line = gets
       words.shift;
       if op == 0 then
         columns = words.select {|e| e =~  /turmas_id|alunos_id|data_matricula/i};
-        if columns.size < 3 or columns.size > 3 then
-          STDERR.puts "Devem ser informados os valores para as colunas: turmas_id, alunos_id e data_matricula"
-        end
-        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
-        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
-        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ");
+
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ") if (columns.length() > 0);
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ") if (columns.length() > 1);
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ")  if (columns.length() > 2);
 
         matricula = Matricula.new()
         matricula.turmas_id = fields[:turmas_id]
@@ -117,14 +106,11 @@ until stop_condition == line = gets
       words.shift;
       if op == 0 then
         columns = words.select {|e| e =~  /professors_id|cursos_id|data_inicio|carga_horaria/i};
-        if columns.size < 4 or columns.size > 4 then
-          STDERR.puts "Devem ser informados os valores para as colunas: professors_id, cursos_id, data_inicio e carga_horaria"
-        end
 
-        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
-        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
-        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" ");
-        fields[:"#{columns[3].downcase}"] = words[(words.index(columns[3])+1)..-1].join(" ");
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ") if (columns.length() > 0);
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ") if (columns.length() > 1);
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" ") if (columns.length() > 2);
+        fields[:"#{columns[3].downcase}"] = words[(words.index(columns[3])+1)..-1].join(" ")  if (columns.length() > 3);
 
         turma = Turma.new()
         turma.professors_id = fields[:professors_id]
