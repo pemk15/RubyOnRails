@@ -35,7 +35,7 @@ until stop_condition == line = gets
 
         fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ") if (columns.length() > 0);
         fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ") if (columns.length() > 1);
-        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ") if (columns.length() > 3);
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ") if (columns.length() > 2);
 
         professor = Professor.new()
         professor.nome = fields[:nome].split.map(&:capitalize).join(' ')
