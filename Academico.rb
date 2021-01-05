@@ -26,7 +26,7 @@ until stop_condition == line = gets
 
   end
   words.shift 
-
+  fields = {:tabela=>words[0].downcase}
   case
     when words[0] =~ /professor/i
       words.shift;
@@ -35,19 +35,15 @@ until stop_condition == line = gets
         if columns.size < 3 or columns.size > 3 then
           STDERR.puts "Devem ser informados os valores para as colunas: nome, email e salario"
         end
-        fields = [{
-          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
-          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
-          :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..-1].join(" ")
-        }];
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ");
 
-        fields.each do |e|
-          professor = Professor.new()
-          professor.nome = e[:nome].split.map(&:capitalize).join(' ')
-          professor.email = e[:email]
-          professor.salario = e[:salario]
-          professor.save
-        end
+        professor = Professor.new()
+        professor.nome = fields[:nome].split.map(&:capitalize).join(' ')
+        professor.email = fields[:email]
+        professor.salario = fields[:salario]
+        professor.save
       end
     when words[0] =~ /aluno/i
       words.shift;
@@ -56,21 +52,17 @@ until stop_condition == line = gets
         if columns.size < 4 or columns.size > 4 then
           STDERR.puts "Devem ser informados os valores para as colunas: nome, email, fone e data_nascimento"
         end
-        fields = [{
-          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
-          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
-          :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" "),
-          :"#{columns[3].downcase}"=>words[(words.index(columns[3])+1)..-1].join(" ")
-        }];
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" ");
+        fields[:"#{columns[3].downcase}"] = words[(words.index(columns[3])+1)..-1].join(" ");
 
-        fields.each do |e|
-          aluno = Aluno.new()
-          aluno.nome = e[:nome].split.map(&:capitalize).join(' ')
-          aluno.email = e[:email]
-          aluno.fone = e[:fone]
-          aluno.data_nascimento = e[:data_nascimento]
-          aluno.save
-        end
+        aluno = Aluno.new()
+        aluno.nome = fields[:nome].split.map(&:capitalize).join(' ')
+        aluno.email = fields[:email]
+        aluno.fone = fields[:fone]
+        aluno.data_nascimento = fields[:data_nascimento]
+        aluno.save
       end
     when words[0] =~ /coordenator/i
       words.shift;
@@ -79,19 +71,15 @@ until stop_condition == line = gets
         if columns.size < 3 or columns.size > 3 then
           STDERR.puts "Devem ser informados os valores para as colunas: professors_id, cursos_id e data_eleicao"
         end
-        fields = [{
-          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
-          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
-          :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..-1].join(" ")
-        }];
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ");
 
-        fields.each do |e|
-          coordenator = Coordenator.new()
-          coordenator.professors_id = e[:professors_id]
-          coordenator.cursos_id = e[:cursos_id]
-          coordenator.data_eleicao = e[:data_eleicao]
-          coordenator.save
-        end
+        coordenator = Coordenator.new()
+        coordenator.professors_id = fields[:professors_id]
+        coordenator.cursos_id = fields[:cursos_id]
+        coordenator.data_eleicao = fields[:data_eleicao]
+        coordenator.save
       end
     when words[0] =~ /curso/i
       words.shift;
@@ -100,17 +88,13 @@ until stop_condition == line = gets
         if columns.size < 2 or columns.size > 2 then
           STDERR.puts "Devem ser informados os valores para as colunas: nome e departamento"
         end
-        fields = [{
-          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
-          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..-1].join(" ")
-        }];
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..-1].join(" ");
 
-        fields.each do |e|
-          curso = Curso.new()
-          curso.nome = e[:nome].split.map(&:capitalize).join(' ')
-          curso.departamento = e[:departamento]
-          curso.save
-        end
+          curso = Curso.new();
+          curso.nome = fields[:nome].split.map(&:capitalize).join(' ');
+          curso.departamento = fields[:departamento];
+          curso.save;
       end
     when words[0] =~ /matricula/i
       words.shift;
@@ -119,19 +103,15 @@ until stop_condition == line = gets
         if columns.size < 3 or columns.size > 3 then
           STDERR.puts "Devem ser informados os valores para as colunas: turmas_id, alunos_id e data_matricula"
         end
-        fields = [{
-          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
-          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
-          :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..-1].join(" ")
-        }];
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..-1].join(" ");
 
-        fields.each do |e|
-          matricula = Matricula.new()
-          matricula.turmas_id = e[:turmas_id]
-          matricula.alunos_id = e[:alunos_id]
-          matricula.data_matricula = e[:data_matricula]
-          matricula.save
-        end
+        matricula = Matricula.new()
+        matricula.turmas_id = fields[:turmas_id]
+        matricula.alunos_id = fields[:alunos_id]
+        matricula.data_matricula = fields[:data_matricula]
+        matricula.save
       end
     when words[0] =~ /turma/i
       words.shift;
@@ -140,21 +120,18 @@ until stop_condition == line = gets
         if columns.size < 4 or columns.size > 4 then
           STDERR.puts "Devem ser informados os valores para as colunas: professors_id, cursos_id, data_inicio e carga_horaria"
         end
-        fields = [{
-          :"#{columns[0].downcase}"=>words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" "),
-          :"#{columns[1].downcase}"=>words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" "),
-          :"#{columns[2].downcase}"=>words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" "),
-          :"#{columns[3].downcase}"=>words[(words.index(columns[3])+1)..-1].join(" ")
-        }];
 
-        fields.each do |e|
-          turma = Turma.new()
-          turma.professors_id = e[:professors_id]
-          turma.cursos_id = e[:cursos_id]
-          turma.data_inicio = e[:data_inicio]
-          turma.carga_horaria = e[:carga_horaria]
-          turma.save
-        end
+        fields[:"#{columns[0].downcase}"] = words[(words.index(columns[0])+1)..(words.index(columns[1])-1)].join(" ");
+        fields[:"#{columns[1].downcase}"] = words[(words.index(columns[1])+1)..(words.index(columns[2])-1)].join(" ");
+        fields[:"#{columns[2].downcase}"] = words[(words.index(columns[2])+1)..(words.index(columns[3])-1)].join(" ");
+        fields[:"#{columns[3].downcase}"] = words[(words.index(columns[3])+1)..-1].join(" ");
+
+        turma = Turma.new()
+        turma.professors_id = fields[:professors_id]
+        turma.cursos_id = fields[:cursos_id]
+        turma.data_inicio = fields[:data_inicio]
+        turma.carga_horaria = fields[:carga_horaria]
+        turma.save
       end
     else
       STDERR.puts "#{words[0]} não é uma tabela ou relação válida"
