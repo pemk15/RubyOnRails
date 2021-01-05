@@ -15,11 +15,11 @@ until stop_condition == line = gets
 
   #Valida operação
   case
-    when words[0] =~ /insert|inserir|insere/i
+    when words[0] =~ /^insert$|^inserir$|^insere$/i
       op = 0;
-    when words[0] =~ /remove|delete|remover/i
+    when words[0] =~ /^remove$|^delete$|^remover$/i
       op = 1;
-    when words[0] =~ /update|atualizar/i
+    when words[0] =~ /^update$|^atualizar$/i
       op = 2;
     else
       STDERR.puts "#{words[0]} não é uma operação válida";
@@ -31,7 +31,7 @@ until stop_condition == line = gets
   fields = {:tabela=>words[0].downcase};
   words.shift;
 
-  columns = words.select {|e| e =~ /id|nome|email|salario|fone|data_nascimento|professors_id|cursos_id|data_eleicao|departamento|turmas_id|alunos_id|data_matricula|data_inicio|carga_horaria/i};
+  columns = words.select {|e| e =~ /^id$|^nome$|^email$|^salario$|^fone$|^data_nascimento$|^professors_id$|^cursos_id$|^data_eleicao$|^departamento$|^turmas_id$|^alunos_id$|^data_matricula$|^data_inicio$|^carga_horaria$/i};
 
   for i in 0..(columns.length()-1)
     if i < (columns.length()-1) then
@@ -114,18 +114,18 @@ until stop_condition == line = gets
       classe.save
     end
   elsif op == 1 #delete
-    # sentenca = "SELECT * from " + fields[:tabela].capitalize + "s WHERE ";
     key = fields.keys[1]
     value = fields.values[1];
-    sentenca = "#{key}: #{value}"
+    sentenca = "#{key}= #{value}"
     fields.drop(2).each do |key, value|
-      if key != 'tabela' then
-        sentenca += ", #{key}: #{value} ";
-      end
+      sentenca += ", #{key}= #{value} ";
     end
-    puts sentenca
-    (fields[:tabela].capitalize).constantize.where(sentenca).destroy;
+    (fields[:tabela].capitalize).constantize.where(sentenca).destroy_all;
   elsif op == 2 #update
-
+    sentenca = "id = " + fields[:id]
+    classe = (fields[:tabela].capitalize).constantize.where(sentenca);
+    fields.drop(2).each do |key, value|
+      classe.update({:"#{key.downcase}"=>"#{value.split.map(&:capitalize).join(' ')}"});
+    end
   end
 end
